@@ -1,6 +1,7 @@
 from util.blocks import processMessage, convert_matrix, convert_list
 from util.galois import mat_mul, rcon
 
+
 class Cipher():
     def __init__(self, msg, key):
         self.msg = msg
@@ -35,7 +36,7 @@ class Cipher():
             self.shiftRows()
             if i != 9:
                 self.mixColumns()
-            
+
             self.addRoundKey()
 
         for i in range(len(self.actual_blocks)):
@@ -93,10 +94,10 @@ class Cipher():
             block = [0 for _ in range(16)]
             temp = nonce
             for j in range(16):
-                block[15-j] = temp&0xff
+                block[15-j] = temp & 0xff
                 temp >>= 8
-        
+
             blocks.append(block)
             nonce += 1
-        
+
         return blocks

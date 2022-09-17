@@ -4,6 +4,7 @@ def decrypt(msg, key):
 
     return pow(msg, e, n)
 
+
 def encrypt(cipher, key):
     d = key[0]
     p = key[1]

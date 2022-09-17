@@ -7,6 +7,7 @@ from util.byte_converter import str_to_bytes
 
 DEFAULT_SIZE = 2048
 
+
 def generate_pair(size=DEFAULT_SIZE):
     primes_size = size >> 1
     p = generate_prime_number(primes_size)
@@ -26,6 +27,7 @@ def generate_pair(size=DEFAULT_SIZE):
     store_keys(public, private, size)
 
     return public, private
+
 
 def store_keys(pub, priv, size=DEFAULT_SIZE):
     def generate_file(path, key):
@@ -49,6 +51,7 @@ def store_keys(pub, priv, size=DEFAULT_SIZE):
     print(f'a chave publica foi gerada no diretorio keys/{filename}.pub')
     print(f'a chave privada foi gerada no diretorio keys/{filename}')
 
+
 def parse_key(file, decod=False, size=DEFAULT_SIZE):
     key = None
     with file as f:
@@ -64,4 +67,5 @@ def parse_key(file, decod=False, size=DEFAULT_SIZE):
         return res
     else:
         mode = "pública para decifrar" if decod else "privada para cifrar"
-        raise Exception(f"Chave inválida! Para a assinatura digital, favor usar a chave {mode}!")
+        raise Exception(
+            f"Chave inválida! Para a assinatura digital, favor usar a chave {mode}!")

@@ -1,6 +1,7 @@
 import argparse
 import base64
-import os, sys
+import os
+import sys
 from rsa.keys import generate_pair
 from rsa.keys import parse_key
 import rsa.cipher as rsa
@@ -11,13 +12,19 @@ from util.byte_converter import bytes_to_arr
 from util.byte_converter import arr_to_bytes
 import hash.sign as signature
 
-parser = argparse.ArgumentParser(description='Cifra e decifra usando o RSA.', formatter_class=argparse.RawTextHelpFormatter)
+parser = argparse.ArgumentParser(
+    description='Cifra e decifra usando o RSA.', formatter_class=argparse.RawTextHelpFormatter)
 
-parser.add_argument('mensagem', type=argparse.FileType('rb'), help='Arquivo com a mensagem a ser cifrada/decifrada')
-parser.add_argument('-k', nargs='?', type=argparse.FileType('r'), help='Arquivo com a chave pública ou privada (a depender do modo usado). Se não informado, serão geradas as chaves automaticamente que serão salvas no arquivo \'keys/key_[id incremental]\'', metavar='chave')
-parser.add_argument('-s', nargs='?', type=argparse.FileType('r'), help='Arquivo com a chave de sessão para a cifração simétrica da mensagem. Se não informado, será gerada no arquivo \'keys/session_[id incremental]\'', metavar='session')
-parser.add_argument('-o', type=argparse.FileType('wb'), help='Arquivo de saída', metavar='output', required=True)
-parser.add_argument('-d', nargs='?', type=str2bool, const=True, default=False, help='Especifica que a mensagem deve ser decifrada na execução (padrão: cifrar)', metavar='decifrar')
+parser.add_argument('mensagem', type=argparse.FileType(
+    'rb'), help='Arquivo com a mensagem a ser cifrada/decifrada')
+parser.add_argument('-k', nargs='?', type=argparse.FileType('r'),
+                    help='Arquivo com a chave pública ou privada (a depender do modo usado). Se não informado, serão geradas as chaves automaticamente que serão salvas no arquivo \'keys/key_[id incremental]\'', metavar='chave')
+parser.add_argument('-s', nargs='?', type=argparse.FileType('r'),
+                    help='Arquivo com a chave de sessão para a cifração simétrica da mensagem. Se não informado, será gerada no arquivo \'keys/session_[id incremental]\'', metavar='session')
+parser.add_argument('-o', type=argparse.FileType('wb'),
+                    help='Arquivo de saída', metavar='output', required=True)
+parser.add_argument('-d', nargs='?', type=str2bool, const=True, default=False,
+                    help='Especifica que a mensagem deve ser decifrada na execução (padrão: cifrar)', metavar='decifrar')
 
 args = parser.parse_args()
 
@@ -36,7 +43,7 @@ with args.mensagem as f:
 pswd = session = None
 if args.k == None:
     if args.d:
-        print("Para verificar a assinatura, é necessário passar a chave pública!")
+        print("Para verificar a assinatura, é necessário passar a chave pública!!")
         exit()
 
     key_pub, key = generate_pair()
@@ -50,7 +57,7 @@ else:
 
 if args.s == None:
     if args.d:
-        print("Para decifrar, é necessário passar a chave de sessão")
+        print("Para decifrar, é necessário passar a chave de sessão!!")
 
     session = aeskey.generate_key()
 else:
@@ -58,7 +65,7 @@ else:
         content = ""
         with args.s as f:
             content = base64.b64decode(f.read())
-        
+
         cont_bytes = [x for x in content]
 
         if args.d:

@@ -1,15 +1,16 @@
 def processMessage(msg):
     blocks = []
     for i in range(len(msg)):
-        if i%16 == 0:
+        if i % 16 == 0:
             blocks.append([])
-        
+
         blocks[-1].append(msg[i])
-    
+
     while len(blocks[-1]) != 16:
         blocks[-1].append(ord('{'))
 
     return blocks
+
 
 def convert_matrix(block):
     res = [[] for _ in range(4)]
@@ -18,6 +19,7 @@ def convert_matrix(block):
             res[i].append(block[i+(4*j)])
 
     return res
+
 
 def convert_list(block):
     res = []

@@ -6,6 +6,7 @@ def bytes_to_str(n):
 
     return res
 
+
 def str_to_bytes(s):
     res = 0
     for c in s:
@@ -14,6 +15,7 @@ def str_to_bytes(s):
 
     return res
 
+
 def bytes_to_arr(n):
     res = []
     while n > 0:
@@ -21,6 +23,7 @@ def bytes_to_arr(n):
         n >>= 8
 
     return res
+
 
 def arr_to_bytes(a):
     res = 0
