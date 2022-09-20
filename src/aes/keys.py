@@ -5,7 +5,7 @@ from rsa.keys import DEFAULT_SIZE
 from util.byte_converter import bytes_to_str
 from util.byte_converter import bytes_to_arr
 
-BLOCK_SIZE = 128
+BLOCK_SIZE = 128 #size 128 bits
 
 
 def generate_key():
